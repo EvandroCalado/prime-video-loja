@@ -1,11 +1,12 @@
 @import "../../styles/mixins.scss";
+@import "../../styles/variables.scss";
 
 .navbar {
   background-color: #1a242f;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 5rem;
+  padding: 2rem 5rem;
 
   .navbar-logo {
     @include flex-center;
@@ -25,25 +26,32 @@
       justify-content: flex-end;
       align-items: center;
       margin-right: 2rem;
-      width: 25rem;
-      height: 3.5rem;
+      width: 30rem;
+      height: 4rem;
       z-index: 0;
       transition: all 200ms linear;
       position: relative;
 
-      .navbar-menu-input-icon {
-        height: 100%;
-        width: 3.5rem;
-        font-size: 2.5rem;
-        padding: 0 0.5rem;
+      .navbar-menu-input-btn {
+        background-color: transparent;
         border: transparent;
-        position: relative;
-        left: 3.5rem;
+
+        .navbar-menu-input-icon {
+          height: 100%;
+          width: 3.5rem;
+          font-size: 2.5rem;
+          padding: 0 0.5rem;
+          border: transparent;
+          position: relative;
+          left: 4rem;
+          color: $color-primary;
+        }
       }
 
       .navbar-menu-input {
         width: 3rem;
         height: 100%;
+        color: #fff;
         background-color: transparent;
         border: transparent;
         outline: none;
@@ -58,10 +66,10 @@
 
         &:focus {
           width: 25rem;
-          border: 1px solid rgba(255, 255, 255, 0.5);
+          border: 1px solid $color-primary;
+          padding: 0 4rem;
           &::placeholder {
-            color: #fff;
-            padding: 0 3.5rem;
+            color: $color-primary;
           }
         }
       }
@@ -76,20 +84,27 @@
         .navbar-menu-arrow {
           transform: rotate(180deg);
         }
+
+        h4 {
+          color: #fff;
+        }
       }
 
       .navbar-menu-lenguage-icon {
         font-size: 2.5rem;
         margin-right: 0.5rem;
+        color: $color-primary;
       }
 
       h4 {
         margin-right: 0.5rem;
+        color: $color-primary;
+        transition: all 200ms ease-in-out;
       }
 
       .navbar-menu-arrow {
         transition: 200ms ease-in-out;
-        color: rgba(255, 255, 255, 0.5);
+        color: $color-primary;
       }
     }
 
@@ -98,7 +113,7 @@
       cursor: pointer;
 
       &:hover {
-        h3 {
+        h4 {
           color: #fff;
         }
 
@@ -107,19 +122,21 @@
         }
       }
 
-      h3 {
-        color: rgba(255, 255, 255, 0.5);
+      h4 {
+        color: $color-primary;
         transition: 200ms ease-in-out;
+        transition: all 200ms ease-in-out;
       }
 
       .navbar-menu-user-icon {
         font-size: 4rem;
         margin-right: 0.5rem;
+        color: $color-primary;
       }
 
       .navbar-menu-arrow {
         transition: 200ms ease-in-out;
-        color: rgba(255, 255, 255, 0.5);
+        color: $color-primary;
       }
     }
   }

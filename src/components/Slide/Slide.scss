@@ -1,0 +1,19 @@
+@import "../../styles/mixins.scss";
+@import "../../styles/variables.scss";
+
+.swiper {
+  margin-bottom: 3rem;
+}
+
+.swiper-slide {
+  @include flex-center;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: #fff;
+}
+
+.swiper-pagination-bullet {
+  background-color: #fff;
+}
