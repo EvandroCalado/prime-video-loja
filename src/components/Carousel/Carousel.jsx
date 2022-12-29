@@ -1,58 +1,28 @@
+import { useEffect, useState } from "react";
+import { getMovies, request } from "../../api/api.js";
 import Movie from "./Movie.jsx";
-import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
-import { useRef } from "react";
-import "./Carousel.scss";
-
-let page = 0
 
 const Carousel = () => {
-  const carousel = useRef();
+  const [trending, setTrending] = useState([]);
+  const [popular, setPopular] = useState([]);
 
-  const handleLeftClick = () => {
-    page = page - 100
+  useEffect(() => {
+    getMovies(request.trending).then((response) => {
+      setTrending(response);
+    });
 
-    carousel.current.style.marginLeft = `${page}%`
-  };
-
-  const handleRightClick = () => {
-    page = page + 100
-
-    carousel.current.style.marginLeft = `-${page}%`
-
-  };
+    getMovies(request.popular).then((response) => {
+      setPopular(response);
+    });
+  }, []);
 
   return (
-    <div className="carousel-contaner">
-      <h3>Loja Filmes Lançamentos</h3>
-        <div onClick={handleLeftClick} className="carousel-btn left">
-          <BsChevronLeft />
-        </div>
-        <div onClick={handleRightClick} className="carousel-btn right">
-          <BsChevronRight />
-        </div>
-      <div className="carousel-wrapper" ref={carousel}>
-        <Movie />
-        <Movie />
-        <Movie />
-        <Movie />
-        <Movie />
-        <Movie />
-        <Movie />
-        <Movie />
-        <Movie />
-        <Movie />
-        <Movie />
-        <Movie />
-        <Movie />
-        <Movie />
-        <Movie />
-        <Movie />
-        <Movie />
-        <Movie />
-        <Movie />
-        <Movie />
-      </div>
-    </div>
+    <>
+      <Movie movies={trending} index={0} />
+      <Movie movies={popular}  index={1} />
+      <Movie movies={popular}  index={1} />
+      <Movie movies={popular}  index={1} />
+    </>
   );
 };
 
