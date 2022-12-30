@@ -1,0 +1,24 @@
+.video-modal {
+  position: absolute;
+  top: 0;
+  z-index: 150;
+  width: 100%;
+  height: 100%;
+  display: none;
+
+  .video-modal-wrapper {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+
+    .video-modal-close {
+      position: fixed;
+      right: 10rem;
+      top: 5rem;
+      font-size: 5rem;
+      z-index: 200;
+      cursor: pointer;
+    }
+  }
+
+}
