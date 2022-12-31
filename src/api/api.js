@@ -33,3 +33,10 @@ export const getVideo = async (id) => {
   );
   return await response.json();
 };
+
+export const getCredits = async (id) => {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${apiKey}&language=en-US`
+  );
+  return await response.json();
+};

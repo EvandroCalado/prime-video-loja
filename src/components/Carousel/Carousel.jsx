@@ -11,7 +11,6 @@ const Carousel = () => {
   const [toRated, setTopRated] = useState([]);
   const [discover, setDiscover] = useState([]);
   const [video, setVideo] = useState("");
-  const [isPlaying, setIsPlaying] = useState(true)
   const modal = useRef(null);
 
   useEffect(() => {
@@ -36,14 +35,12 @@ const Carousel = () => {
     getVideo(movieid).then((response) => {
       setVideo(response?.results?.[0]?.key);
       modal.current.style.display = "block";
-      setIsPlaying(true)
     });
   };
 
   const handleCloseClick = () => {
-    modal.current.style.display = "none"
-    setIsPlaying(false)
-  }
+    modal.current.style.display = "none";
+  };
 
   return (
     <>
@@ -57,7 +54,7 @@ const Carousel = () => {
             url={`https://www.youtube.com/watch?v=${video}`}
             width="100%"
             height="100%"
-            playing={isPlaying}
+            playing
             muted
           />
         </div>

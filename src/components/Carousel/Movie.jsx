@@ -1,13 +1,10 @@
 import { useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import { FiPlay } from "react-icons/fi";
 import { AiOutlinePlus } from "react-icons/ai";
 import { MdDoNotDisturbAlt, MdOutlineMessage } from "react-icons/md";
-
 import "./Movie.scss";
-import { Link } from "react-router-dom";
-
-let WidthToMove = 0;
 
 const Movie = ({ movies, title, handlePLayClick }) => {
   const carousel = useRef();
@@ -15,13 +12,11 @@ const Movie = ({ movies, title, handlePLayClick }) => {
 
   const handleClick = (direction) => {
     if (direction === "left") {
-      WidthToMove = WidthToMove + 304;
-      carousel.current.style.marginLeft = `${WidthToMove}px`;
+      carousel.current.scrollLeft -= carousel.current.offsetWidth;
     }
 
     if (direction === "right") {
-      WidthToMove = WidthToMove - 304;
-      carousel.current.style.marginLeft = `${WidthToMove}px`;
+      carousel.current.scrollLeft += carousel.current.offsetWidth;
       isSlide(true);
     }
   };
