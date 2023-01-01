@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import { FiPlay } from "react-icons/fi";
@@ -7,8 +7,8 @@ import { MdDoNotDisturbAlt, MdOutlineMessage } from "react-icons/md";
 import "./Movie.scss";
 
 const Movie = ({ movies, title, handlePLayClick }) => {
-  const carousel = useRef();
   const [slide, isSlide] = useState(false);
+  const carousel = useRef();
 
   const handleClick = (direction) => {
     if (direction === "left") {
@@ -30,6 +30,7 @@ const Movie = ({ movies, title, handlePLayClick }) => {
           <div className="movie-img-fade"></div>
         </Link>
         <img className="movie-img" src={image} alt={movie.id} />
+
         <div
           className="movie-info-money-container"
           data-title="Estão disponíveis vídeos com R$ para alugar, comprar ou incluídos em assinaturas."

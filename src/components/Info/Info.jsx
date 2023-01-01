@@ -1,6 +1,12 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getCredits, getDetails, getVideo } from "../../api/api";
+import {
+  getCredits,
+  getDetails,
+  getImdbRating,
+  getSimilar,
+  getVideo,
+} from "../../api/api";
 import { SiImdb } from "react-icons/si";
 import { MdOutlineMessage, MdOutlineModeEditOutline } from "react-icons/md";
 import {
@@ -12,15 +18,20 @@ import { FiPlay, FiShare2 } from "react-icons/fi";
 import { GiPartyPopper } from "react-icons/gi";
 import "./Info.scss";
 import ReactPlayer from "react-player";
+import Movie from "../Carousel/Movie";
 
 const Info = () => {
   const [movieDetails, setMovieDetails] = useState([]);
   const [movieVideo, setMovieVideo] = useState([]);
-  const [credits, setCredits] = useState([])
+  const [credits, setCredits] = useState([]);
   const [isPLayer, setIsPLayer] = useState(true);
+  const [similar, setSimilar] = useState([]);
+  const [imdbRating, setImdbRating] = useState([]);
   const movie = useParams();
 
-  // console.log(credits?.cast);
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  });
 
   useEffect(() => {
     getDetails(movie.id).then((response) => {
@@ -32,24 +43,33 @@ const Info = () => {
     });
 
     getCredits(movie.id).then((response) => {
-      setCredits(response)
-    })
+      setCredits(response);
+    });
+
+    getSimilar(movie.id).then((response) => {
+      setSimilar(response);
+    });
   }, []);
 
+  useEffect(() => {
+    getImdbRating(movieDetails?.imdb_id).then((response) => {
+      setImdbRating(response);
+    });
+  }, [movieDetails]);
+
   const renderGenre = movieDetails?.genres?.map((genre, index) => {
-    return <span key={index} >{genre?.name}</span>
-  })
+    return <span key={index}>{genre?.name}</span>;
+  });
 
   const renderLanguages = movieDetails?.spoken_languages?.map((lang, index) => {
-    return <span key={index}>{lang?.name}</span>
-  })
+    return <span key={index}>{lang?.name}</span>;
+  });
 
-  // const renderCast = credits?.filter(cast => cast?.length < 5)
-  // console.log(renderCast)
+  const free =
+    "https://m.media-amazon.com/images/G/01/vcc/maturity-ratings-logos/png/djctq/l.png";
 
-  const free = "https://m.media-amazon.com/images/G/01/vcc/maturity-ratings-logos/png/djctq/l.png"
-
-  const mature = "https://m.media-amazon.com/images/G/01/vcc/maturity-ratings-logos/png/djctq/18.png"
+  const mature =
+    "https://m.media-amazon.com/images/G/01/vcc/maturity-ratings-logos/png/djctq/18.png";
 
   return (
     <div className="info-container">
@@ -73,15 +93,14 @@ const Info = () => {
         )}
       </div>
       <div className="info">
-        <h1 className="info-title">
-          {movieDetails?.title}
-        </h1>
+        <h1 className="info-title">{movieDetails?.title}</h1>
         <div className="info-movie">
           <div className="info-imdb">
-            <SiImdb className="info-imdb-icon" /> <p>6,7</p>
+            <SiImdb className="info-imdb-icon" />{" "}
+            <p>{imdbRating?.movie_results?.[0]?.vote_average.toFixed(1)}</p>
           </div>
           <p>{movieDetails?.runtime}min</p>
-          <p>{movieDetails?.release_date?.substr(0,4)}</p>
+          <p>{movieDetails?.release_date?.substr(0, 4)}</p>
           <img
             className="info-movie-img"
             src={movieDetails?.adult ? mature : free}
@@ -97,27 +116,24 @@ const Info = () => {
           <div className="info-credits-cast">
             <div className="info-credits-title">Diretor</div>
             <div className="info-credits-name">
-              <span>Alfonso Pineda Ulloa,</span> <span>Alejandro Ricaño</span>{" "}
+              <span>{credits?.crew?.[1]?.name}</span>
             </div>
           </div>
           <div className="info-credits-cast">
             <div className="info-credits-title">Atores principais</div>
             <div className="info-credits-name">
-              <span>David Chocarro,</span> <span>Dulce María,</span>{" "}
-              <span>Mauricio Argüelles</span>
+              <span>{credits?.cast?.[0]?.name}</span>{" "}
+              <span>{credits?.cast?.[1]?.name}</span>
+              <span>{credits?.cast?.[2]?.name}</span>
             </div>
           </div>
           <div className="info-credits-cast">
             <div className="info-credits-title">Gênero</div>
-            <div className="info-credits-name">
-              {renderGenre}
-            </div>
+            <div className="info-credits-name">{renderGenre}</div>
           </div>
           <div className="info-credits-cast">
             <div className="info-credits-title">Idiomas de áudio</div>
-            <div className="info-credits-name">
-              {renderLanguages}
-            </div>
+            <div className="info-credits-name">{renderLanguages}</div>
           </div>
         </div>
 
@@ -171,12 +187,21 @@ const Info = () => {
             <FiShare2 className="info-footer-icon" /> <h5>Compartilhar</h5>
           </div>
           <div className="info-footer-icons">
-            <MdOutlineModeEditOutline className="info-footer-icon" /> <h5>Feedback</h5>
+            <MdOutlineModeEditOutline className="info-footer-icon" />{" "}
+            <h5>Feedback</h5>
           </div>
           <div className="info-footer-icons">
-            <AiOutlineQuestionCircle className="info-footer-icon" /> <h5>Ajuda</h5>
+            <AiOutlineQuestionCircle className="info-footer-icon" />{" "}
+            <h5>Ajuda</h5>
           </div>
         </div>
+      </div>
+      <div className="similar">
+        <Movie
+          movies={similar}
+          title="Os clientes também assistiram"
+          // handlePLayClick={handlePLayClick}
+        />
       </div>
     </div>
   );

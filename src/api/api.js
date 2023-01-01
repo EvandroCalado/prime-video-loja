@@ -8,14 +8,14 @@ export const getMovies = async (url) => {
 export const request = {
   trending: `https://api.themoviedb.org/3/trending/all/week?api_key=${apiKey}&language=pt-BR`,
 
-  popular: `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=pt-BR&page=2`,
+  popular: `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=pt-BR&page=1`,
 
   topRated: `https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&language=pt-BR&page=1`,
 };
 
 export const getDircover = async () => {
   const response = await fetch(
-    `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=pt-BR&sort_by=popularity.desc&include_adult=false&include_video=true&page=3&with_watch_monetization_types=flatrate`
+    `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=pt-BR&sort_by=popularity.desc&include_adult=false&include_video=true&page=1&with_watch_monetization_types=flatrate`
   );
   return await response.json();
 };
@@ -37,6 +37,20 @@ export const getVideo = async (id) => {
 export const getCredits = async (id) => {
   const response = await fetch(
     `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${apiKey}&language=en-US`
+  );
+  return await response.json();
+};
+
+export const getSimilar = async (id) => {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/movie/${id}/similar?api_key=${apiKey}&language=pt-BR&page=1`
+  );
+  return await response.json();
+};
+
+export const getImdbRating = async (imdbId) => {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/find/${imdbId}?api_key=${apiKey}&external_source=imdb_id&language=en-US`
   );
   return await response.json();
 };

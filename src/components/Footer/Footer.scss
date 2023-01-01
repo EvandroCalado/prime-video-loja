@@ -1,0 +1,33 @@
+@import "../../styles/mixins.scss";
+@import "../../styles/variables.scss";
+
+.footer {
+  @include flex-center;
+  flex-direction: column;
+  margin: 21rem 0 4rem 0;
+
+  .footer-logo {
+    width: 10rem;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .footer-term {
+    p {
+      color: $color-primary;
+
+      span {
+        color: $color-destak;
+        margin-right: 2rem;
+        transition: all 200ms ease-in-out;
+        cursor: pointer;
+
+        &:hover {
+          color: darken($color-destak, 10);
+        }
+      }
+    }
+  }
+}

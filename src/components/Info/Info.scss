@@ -124,12 +124,11 @@
           width: 70%;
           cursor: pointer;
 
-          &:hover {
-            color: darken($color-destak, 10);
-          }
-
           span {
             margin-right: 0.5rem;
+            &:hover {
+              color: darken($color-destak, 10);
+            }
           }
         }
       }
@@ -197,6 +196,7 @@
         position: relative;
 
         .info-value-icon {
+          @include flex-center;
           width: 4.5rem;
           height: 4.5rem;
           margin-right: 1rem;
@@ -247,12 +247,17 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 10rem;
 
     .info-footer-term {
       width: 50%;
 
       span {
         color: $color-destak;
+        cursor: pointer;
+        &:hover {
+          color: darken($color-destak, 10)
+        }
       }
     }
 
@@ -264,6 +269,14 @@
         display: flex;
         margin-left: 2rem;
         font-size: 2rem;
+        cursor: pointer;
+        transition: all 200ms ease-in-out;
+
+        &:hover {
+          .info-footer-icon {
+            color: #fff;
+          }
+        }
 
         .info-footer-icon {
           color: $color-primary;

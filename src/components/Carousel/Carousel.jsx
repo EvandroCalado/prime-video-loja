@@ -11,7 +11,7 @@ const Carousel = () => {
   const [toRated, setTopRated] = useState([]);
   const [discover, setDiscover] = useState([]);
   const [video, setVideo] = useState("");
-  const modal = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
     getMovies(request.trending).then((response) => {
@@ -34,31 +34,34 @@ const Carousel = () => {
   const handlePLayClick = (movieid) => {
     getVideo(movieid).then((response) => {
       setVideo(response?.results?.[0]?.key);
-      modal.current.style.display = "block";
+      setIsPlaying(true);
     });
   };
 
   const handleCloseClick = () => {
-    modal.current.style.display = "none";
+    setIsPlaying(false);
   };
 
   return (
     <>
-      <div className="video-modal" ref={modal}>
-        <div className="video-modal-wrapper">
-          <VscChromeClose
-            onClick={handleCloseClick}
-            className="video-modal-close"
-          />
-          <ReactPlayer
-            url={`https://www.youtube.com/watch?v=${video}`}
-            width="100%"
-            height="100%"
-            playing
-            muted
-          />
+      {isPlaying && (
+        <div style={{ zIndex: 300 }} className="video-modal">
+          <div className="video-modal-wrapper">
+            <VscChromeClose
+              onClick={handleCloseClick}
+              className="video-modal-close"
+            />
+            <ReactPlayer
+              onEnded={() => setIsPlaying(false)}
+              url={`https://www.youtube.com/watch?v=${video}`}
+              width="100%"
+              height="100%"
+              playing
+              muted
+            />
+          </div>
         </div>
-      </div>
+      )}
       <Movie
         movies={trending}
         title="Filmes Lançamentos"
