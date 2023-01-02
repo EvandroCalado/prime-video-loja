@@ -197,6 +197,9 @@ const Info = () => {
         </div>
       </div>
       <div className="similar">
+        <div className="similar-title">
+          <h2>Relacionados</h2>
+        </div>
         <Movie
           movies={similar}
           title="Os clientes também assistiram"

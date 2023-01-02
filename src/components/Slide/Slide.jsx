@@ -8,41 +8,46 @@ const Slide = () => {
   const handleSlideClick = (direction) => {
     if (direction === "left") {
       const slideItem = document.querySelectorAll(".slide")[8];
-      console.log(slideItem);
-      // if (slide.current.scrollLeft === 0) {
-      //   slide.current.scrollLeft += slide.current.offsetWidth * 8;
-      // } else {
-      //   slide.current.scrollLeft -= slide.current.offsetWidth;
-      // }
-      slide.current.style.marginLeft = "100%";
-      slide.current.style.transition = "1s linear";
+      const selected = document.querySelector(".selected");
+      const dots = document.querySelector(".slide-dots");
 
+      slide.current.style.marginLeft = "0";
+      slide.current.style.transition = "1s linear";
       setTimeout(() => {
-        slide.current.style.marginLeft = "100%";
+        slide.current.style.transition = "none";
         slide.current.insertAdjacentElement("afterbegin", slideItem);
-        slide.current.style.marginLeft = "0";
-        // slide.current.style.transition = "none";
-        // slide.current.style.marginLeft = "0"
-        
+        slide.current.style.marginLeft = "-100%";
       }, 1000);
-      // slide.current.style.marginLeft = "0";
+
+      if (selected.previousElementSibling === null) {
+        selected.classList.remove("selected");
+        dots.lastElementChild.classList.add("selected");
+      } else {
+        selected.classList.remove("selected");
+        selected.previousElementSibling.classList.add("selected");
+      }
     }
 
     if (direction === "right") {
       const slideItem = document.querySelector(".slide");
-      // if (slide.current.scrollLeft === slide.current.offsetWidth * 8) {
-      //   console.log(slide.current.scrollLeft);
-      //   slide.current.scrollLeft -= slide.current.offsetWidth * 8;
-      // } else {
-      //   slide.current.scrollLeft += slide.current.offsetWidth;
-      // }
-      slide.current.style.marginLeft = "-100%";
+      const selected = document.querySelector(".selected");
+      const dots = document.querySelector(".slide-dots");
+
+      slide.current.style.marginLeft = "-200%";
       slide.current.style.transition = "1s linear";
       setTimeout(() => {
         slide.current.style.transition = "none";
-        slide.current.style.marginLeft = "0";
         slide.current.insertAdjacentElement("beforeend", slideItem);
+        slide.current.style.marginLeft = "-100%";
       }, 1000);
+
+      if (selected.nextElementSibling === null) {
+        selected.classList.remove("selected");
+        dots.firstElementChild.classList.add("selected");
+      } else {
+        selected.classList.remove("selected");
+        selected.nextElementSibling.classList.add("selected");
+      }
     }
   };
 
@@ -56,6 +61,17 @@ const Slide = () => {
         className="slide-btn right"
         onClick={() => handleSlideClick("right")}
       />
+      <ul className="slide-dots">
+        <li></li>
+        <li className="selected"></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
       <div className="slide-wrapper" ref={slide}>
         <div className="slide">
           <img

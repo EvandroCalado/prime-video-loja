@@ -8,7 +8,7 @@ export const getMovies = async (url) => {
 export const request = {
   trending: `https://api.themoviedb.org/3/trending/all/week?api_key=${apiKey}&language=pt-BR`,
 
-  popular: `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=pt-BR&page=1`,
+  popular: `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=pt-BR&page=2`,
 
   topRated: `https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&language=pt-BR&page=1`,
 };

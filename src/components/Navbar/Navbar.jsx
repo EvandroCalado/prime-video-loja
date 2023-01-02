@@ -1,10 +1,21 @@
+import { useState } from "react";
 import { AiOutlineSearch, AiOutlineGlobal } from "react-icons/ai";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { RxAvatar } from "react-icons/rx";
+import { useNavigate } from "react-router-dom";
 
 import "./Navbar.scss";
 
 const Navbar = () => {
+  const [search, setSearch] = useState("");
+  const navigate = useNavigate();
+
+  const handleSubmitClick = (e) => {
+    e.preventDefault();
+    navigate(`/search/${e.target.movie.value}`);
+    setSearch("");
+  };
+
   return (
     <div className="navbar-container">
       <nav className="navbar">
@@ -13,11 +24,17 @@ const Navbar = () => {
           <h3>Loja</h3>
         </div>
         <div className="navbar-menu">
-          <form className="navbar-menu-input-container">
+          <form
+            onSubmit={handleSubmitClick}
+            className="navbar-menu-input-container"
+          >
             <button type="submit" className="navbar-menu-input-btn">
               <AiOutlineSearch className="navbar-menu-input-icon" />
             </button>
             <input
+              onChange={(e) => setSearch(e.target.value)}
+              value={search}
+              name="movie"
               type="text"
               className="navbar-menu-input"
               placeholder="Busca"
