@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { getDircover, getMovies, getVideo, request } from "../../api/api.js";
 import { VscChromeClose } from "react-icons/vsc";
 import Movie from "./Movie.jsx";

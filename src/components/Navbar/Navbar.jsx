@@ -1,6 +1,12 @@
 import { useState } from "react";
-import { AiOutlineSearch, AiOutlineGlobal, AiFillStar, AiOutlinePlus } from "react-icons/ai";
+import {
+  AiOutlineSearch,
+  AiOutlineGlobal,
+  AiFillStar,
+  AiOutlinePlus,
+} from "react-icons/ai";
 import { IoMdArrowDropdown } from "react-icons/io";
+import { SiPrimevideo } from "react-icons/si";
 import { RxAvatar } from "react-icons/rx";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -21,7 +27,7 @@ const Navbar = () => {
       <nav className="navbar">
         <div className="navbar-logo">
           <Link to={"/"}>
-            <img src="../src/assets/prime.png" alt="Logo" />
+            <SiPrimevideo className="prime-logo" />
           </Link>
           <h3>Loja</h3>
         </div>
@@ -60,8 +66,13 @@ const Navbar = () => {
                 <p>Não é Evandro? Sair</p>
               </div>
               <div className="user-dropdown-right">
-                <div><AiFillStar className="icon" /> <p>Crianças</p> </div>
-                <div>< AiOutlinePlus className="icon" /> <p>Adicionar novo perfil</p> </div>
+                <div>
+                  <AiFillStar className="icon" /> <p>Crianças</p>{" "}
+                </div>
+                <div>
+                  <AiOutlinePlus className="icon" />{" "}
+                  <p>Adicionar novo perfil</p>{" "}
+                </div>
                 <p>Edtar perfis</p>
                 <p>Saiba mais</p>
               </div>

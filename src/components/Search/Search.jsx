@@ -12,7 +12,7 @@ const Search = () => {
     getSearch(search.movie).then((response) => {
       setMovies(response);
     });
-  }, []);
+  }, [search]);
 
   const renderCard = movies?.results?.map((movie) => {
     const image = `https://image.tmdb.org/t/p/w300${movie.backdrop_path}`;
