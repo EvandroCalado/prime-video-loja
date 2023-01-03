@@ -75,5 +75,19 @@
     @include flex-center;
     flex: none;
     width: 100%;
+
+    @include devices(desktop) {
+      img {
+        width: 100%;
+        height: 30rem;
+        object-fit: cover;
+      }
+    }
+    @include devices(tablet) {
+      img {
+        height: 30rem;
+        object-fit: cover;
+      }
+    }
   }
 }

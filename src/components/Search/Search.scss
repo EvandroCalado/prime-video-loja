@@ -1,0 +1,48 @@
+@import "../../styles/variables.scss";
+
+.search-container {
+  width: 100%;
+  max-width: 150rem;
+  margin: 0 auto;
+  padding: 2rem;
+
+  .search-header {
+    width: 100%;
+    height: 7rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid $background-tertiary;
+    margin: 2.5rem 0;
+
+    h3 {
+      color: $background-tertiary;
+    }
+
+    button {
+      background-color: $background-tertiary;
+      padding: 1.2rem 2.5rem;
+      border-radius: 0.5rem;
+      border: none;
+      outline: none;
+      color: #fff;
+      font-size: 1.5rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 200ms ease-in-out;
+
+      &:hover {
+        background-color: lighten($background-tertiary, 10);
+      }
+    }
+  }
+
+  .search-container-card {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 29.4rem);
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+  }
+}

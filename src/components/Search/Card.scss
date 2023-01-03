@@ -1,0 +1,182 @@
+@import "../../styles/variables.scss";
+@import "../../styles/mixins.scss";
+
+.card-container {
+  @include flex-center;
+  width: 29.4rem;
+  height: 22rem;
+  padding: 2rem;
+
+  .card-wrapper {
+    width: 29.4rem;
+    height: 23rem;
+    border-radius: 0.3rem 0.3rem 0 0;
+    background-color: $background-secondary;
+    transition: transform 200ms ease-in-out;
+
+    .card-wrapper-money-container {
+      position: absolute;
+      z-index: 2;
+
+      &:hover::after {
+        content: attr(data-title);
+        font-size: 1.4rem;
+        padding: 0.5rem 1rem;
+        width: 23rem;
+        height: 5.5rem;
+        background-color: $background-secondary;
+        position: absolute;
+        top: -7.6rem;
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 0.3rem;
+        box-shadow: 1px 4px 8px rgba(0, 0, 0, 0.3);
+      }
+
+      &:hover::before {
+        content: "";
+        width: 0;
+        height: 0;
+        border-left: 0.8rem solid transparent;
+        border-right: 0.8rem solid transparent;
+        border-top: 0.8rem solid $background-secondary;
+        position: absolute;
+        top: -1.2rem;
+        box-shadow: 1px 4px 8px rgba(0, 0, 0, 0.3);
+        z-index: 2;
+      }
+    }
+
+    .card-image {
+      width: 28.4rem;
+      height: 15.4rem;
+      background-color: $color-primary;
+      border-radius: 0.3rem 0.3rem 0 0;
+
+      img {
+        width: 100%;
+        border-radius: 0.3rem 0.3rem 0 0;
+      }
+    }
+
+    &:hover {
+      transform: scale(1.1);
+      height: 32.5rem;
+      border-radius: 0.3rem;
+      border: 2px solid $color-secondary;
+      z-index: 3;
+
+      .card-image {
+        z-index: 4;
+      }
+
+      .card-image-fade {
+        width: 28.4rem;
+        height: 16.4rem;
+        background-image: linear-gradient(
+          to top,
+          $background-secondary 5%,
+          transparent 95%
+        );
+        position: absolute;
+        top: 0;
+        cursor: pointer;
+      }
+
+      .card-content {
+        .card-content-header {
+          .card-content-description {
+            display: block;
+          }
+        }
+      }
+    }
+
+    .card-content {
+      padding: 1.2rem;
+
+      .card-content-header {
+        display: flex;
+        flex-direction: column;
+
+        .card-content-title {
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        h5 {
+          margin-bottom: 1rem;
+          height: 1.8rem;
+          overflow: hidden;
+        }
+
+        .card-content-description {
+          font-size: 1.3rem;
+          margin-bottom: 1rem;
+          height: 8rem;
+          overflow: hidden;
+          display: none;
+        }
+
+        .card-content-info {
+          display: flex;
+
+          .imdb {
+            font-size: 2rem;
+            margin-right: 0.5rem;
+          }
+
+          p {
+            font-size: 1.5rem;
+            margin-right: 1.5rem;
+            color: $color-primary;
+          }
+
+          img {
+            width: 2rem;
+          }
+        }
+
+        .plus-container {
+          position: relative;
+
+          &:hover::after {
+            @include flex-center;
+            content: attr(data-title);
+            width: 17rem;
+            height: 3.5rem;
+            border-radius: 0.3rem;
+            background-color: $background-tertiary;
+            position: absolute;
+            top: -4.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 1px 4px 8px rgba(0, 0, 0, 0.3);
+          }
+
+          &:hover::before {
+            content: "";
+            width: 0;
+            height: 0;
+            border-left: 0.8rem solid transparent;
+            border-right: 0.8rem solid transparent;
+            border-top: 0.8rem solid $background-tertiary;
+            position: absolute;
+            top: -1.1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            box-shadow: 1px 4px 8px rgba(0, 0, 0, 0.3);
+          }
+
+          .plus {
+            cursor: pointer;
+            font-size: 3rem;
+          }
+        }
+      }
+    }
+  }
+}

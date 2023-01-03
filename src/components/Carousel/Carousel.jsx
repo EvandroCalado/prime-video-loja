@@ -79,7 +79,7 @@ const Carousel = () => {
       />
       <Movie
         movies={discover}
-        title="Discubra"
+        title="Descubra"
         handlePLayClick={handlePLayClick}
       />
     </>

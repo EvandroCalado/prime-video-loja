@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import { FiPlay } from "react-icons/fi";
 import { AiOutlinePlus } from "react-icons/ai";
@@ -9,6 +9,7 @@ import "./Movie.scss";
 const Movie = ({ movies, title, handlePLayClick }) => {
   const [slide, isSlide] = useState(false);
   const carousel = useRef();
+  const navigate = useNavigate()
 
   const handleClick = (direction) => {
     if (direction === "left") {
@@ -25,67 +26,70 @@ const Movie = ({ movies, title, handlePLayClick }) => {
     const image = `https://image.tmdb.org/t/p/w300${movie.backdrop_path}`;
 
     return (
-      <div key={movie.id} className="movie-image">
-        <Link to={`info/${movie.id}`}>
-          <div className="movie-img-fade"></div>
-        </Link>
-        <img className="movie-img" src={image} alt={movie.id} />
+      movie.backdrop_path &&
+      movie.title && (
+        <div key={movie.id} className="movie-image">
+          <Link to={`info/${movie.id}`}>
+            <div className="movie-img-fade"></div>
+          </Link>
+          <img className="movie-img" src={image} alt={movie.id} />
 
-        <div
-          className="movie-info-money-container"
-          data-title="Estão disponíveis vídeos com R$ para alugar, comprar ou incluídos em assinaturas."
-        >
-          <img
-            className="movie-info-money"
-            src="https://m.media-amazon.com/images/G/01/digital/video/web/cues/v3/brl.svg"
-            alt="R$"
-          />
-        </div>
-        <div className="movie-info">
-          <div className="movie-info-top">
-            <h5 className="movie-info-top-title">Alugar por R$ 14,90</h5>
-            <div className="movie-info-top-icons">
-              <div
-                className="movie-info-top-icon"
-                data-title="Assistir ao trailer"
-              >
-                <FiPlay onClick={() => handlePLayClick(movie.id)} />
+          <div
+            className="movie-info-money-container"
+            data-title="Estão disponíveis vídeos com R$ para alugar, comprar ou incluídos em assinaturas."
+          >
+            <img
+              className="movie-info-money"
+              src="https://m.media-amazon.com/images/G/01/digital/video/web/cues/v3/brl.svg"
+              alt="R$"
+            />
+          </div>
+          <div className="movie-info">
+            <div className="movie-info-top">
+              <h5 className="movie-info-top-title">Alugar por R$ 14,90</h5>
+              <div className="movie-info-top-icons">
+                <div
+                  className="movie-info-top-icon"
+                  data-title="Assistir ao trailer"
+                >
+                  <FiPlay onClick={() => handlePLayClick(movie.id)} />
+                </div>
+                <div
+                  className="movie-info-top-icon"
+                  data-title="Adicionar à sua lista"
+                >
+                  <AiOutlinePlus />
+                </div>
+                <div
+                  className="movie-info-top-icon"
+                  data-title="Ocultar esse filme"
+                >
+                  <MdDoNotDisturbAlt />
+                </div>
               </div>
-              <div
-                className="movie-info-top-icon"
-                data-title="Adicionar à sua lista"
-              >
-                <AiOutlinePlus />
-              </div>
-              <div
-                className="movie-info-top-icon"
-                data-title="Ocultar esse filme"
-              >
-                <MdDoNotDisturbAlt />
+            </div>
+            <div className="movie-info-body">
+              <h5 className="movie-info-body-title">{movie.title}</h5>
+              <p className="movie-info-body-description">{movie.overview}</p>
+            </div>
+            <div className="movie-info-footer">
+              <p>1h 45min</p> <p>{movie?.release_date?.substr(0, 4)}</p>{" "}
+              <MdOutlineMessage />
+              <div>
+                <img
+                  className="movie-info-footer-image"
+                  src={
+                    movie?.adult
+                      ? "https://m.media-amazon.com/images/G/01/vcc/maturity-ratings-logos/png/djctq/18.png"
+                      : "https://m.media-amazon.com/images/G/01/vcc/maturity-ratings-logos/png/djctq/l.png"
+                  }
+                  alt=""
+                />
               </div>
             </div>
           </div>
-          <div className="movie-info-body">
-            <h5 className="movie-info-body-title">{movie.title}</h5>
-            <p className="movie-info-body-description">{movie.overview}</p>
-          </div>
-          <div className="movie-info-footer">
-            <p>1h 45min</p> <p>{movie?.release_date?.substr(0, 4)}</p>{" "}
-            <MdOutlineMessage />
-            <div>
-              <img
-                className="movie-info-footer-image"
-                src={
-                  movie?.adult
-                    ? "https://m.media-amazon.com/images/G/01/vcc/maturity-ratings-logos/png/djctq/18.png"
-                    : "https://m.media-amazon.com/images/G/01/vcc/maturity-ratings-logos/png/djctq/l.png"
-                }
-                alt=""
-              />
-            </div>
-          </div>
         </div>
-      </div>
+      )
     );
   });
 
